@@ -7,3 +7,5 @@ To Do List:
 - Import audio
 - KeyListener stuff
 - Make key objects
+- Clicky things with mouse
+- Key pressing animations
