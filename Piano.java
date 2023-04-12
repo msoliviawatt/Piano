@@ -22,7 +22,7 @@ public class Piano {
         //black keys
         int blackKeyIndex = 0;
         for (int i = 0; i < WHITE_KEYS; i++) {
-            if (i % 7 == 2 || i % 7 == 6) {
+            if (i % 7 != 2 || i % 7 != 6) {
                 blackKeys[blackKeyIndex] = new BlackKey(i * 20, 0, 20, 100, blackKey, blackKeyDown);
                 blackKeyIndex++;
             }
