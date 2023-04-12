@@ -10,6 +10,10 @@ public class PianoLayout extends JScrollPane {
         initComponents();
     }
 
+    public PianoLayout(Piano piano) {
+        initComponents();
+    }
+
     private void initComponents() {
         JLayeredPane layer = new JLayeredPane();
         layer.setSize(1120,150);
