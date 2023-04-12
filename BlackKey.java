@@ -68,20 +68,11 @@ public class BlackKey {
         }
     }
 
-    public boolean contains(int x, int y) {
-        return (x >= this.x && x <= this.x + width && y >= this.y && y <= this.y + height);
-    }
-
     public void press() {
         isPressed = true;
     }
 
     public void release() {
         isPressed = false;
-    }
-
-    public void move(int x, int y) {
-        this.x = x;
-        this.y = y;
     }
 }
