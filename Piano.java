@@ -37,13 +37,5 @@ public class Piano {
     }
 
     public static void  main(String[] arg) {
-        JPanel panel = new JPanel();
-        Piano piano = new Piano();
-        PianoLayout pianoLayout = new PianoLayout(piano);
-        JFrame frame = new JFrame();
-        panel.add(pianoLayout);
-        frame.add(pianoLayout);
-        frame.setSize(1120, 150);
-        frame.setVisible(true);
     }
 }
