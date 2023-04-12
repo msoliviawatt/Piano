@@ -9,3 +9,6 @@ To Do List:
 - Make key objects
 - Clicky things with mouse
 - Key pressing animations
+
+Week One:
+- Create basic piano structure/image/object/whatever
