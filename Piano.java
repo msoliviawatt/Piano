@@ -1,6 +1,5 @@
 import java.awt.*;
-
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 public class Piano {
     private final int WHITE_KEYS = 52;
@@ -35,5 +34,11 @@ public class Piano {
 
     public WhiteKey[] getWhiteKeys() {
         return whiteKeys;
+    }
+
+    public static void  main(String[] arg) {
+        JPanel panel = new JPanel();
+        JFrame frame = new JFrame();
+        PianoLayout pianoLayout = new PianoLayout();
     }
 }
