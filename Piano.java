@@ -28,4 +28,12 @@ public class Piano {
             }
         }
     }
+
+    public BlackKey[] getBlackKeys() {
+        return blackKeys;
+    }
+
+    public WhiteKey[] getWhiteKeys() {
+        return whiteKeys;
+    }
 }
