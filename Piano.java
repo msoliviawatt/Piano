@@ -3,20 +3,22 @@ import java.awt.*;
 import java.util.*;
    
 public class Piano {
-   private final int WHITE_KEYS = 52;
-   private final int BLACK_KEYS = 36;
+//number of keys in 4 octaves
+   private static final int WHITE_KEYS = 29; 
+   private static final int BLACK_KEYS = 20;
    public static PianoLayout piano = new PianoLayout();
 
    private BlackKey[] blackKeys = new BlackKey[BLACK_KEYS];
    private WhiteKey[] whiteKeys = new WhiteKey[WHITE_KEYS];
-
+   final static int SCREEN_WIDTH = 1300;
+   final static int SCREEN_HEIGHT = 300;
     //black key images
    private static Image blackKey = new ImageIcon("blackKey.png").getImage();
    private static Image blackKeyDown = new ImageIcon("blackKeyDown.png").getImage();
    private static Image whiteKey = new ImageIcon("whiteKey.png").getImage();
    private static Image whiteKeyDown = new ImageIcon("whiteKeyDown.png").getImage();
-      private static ImageIcon blackKeyI = new ImageIcon("blackKey.png");
-
+   private static ImageIcon blackKeyI = new ImageIcon("blackKey.png");
+   private static ImageIcon whiteKeyI = new ImageIcon("whiteKey.png");
    public Piano() {
       //white keys
       for (int i = 0; i < WHITE_KEYS; i++) {
@@ -54,12 +56,21 @@ public class Piano {
    
    public static void main(String[]args)
    {
+   
       JFrame frame = new JFrame("Piano");	//window title
-      JButton button = new JButton(blackKeyI);
-      frame.add(button);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      frame.setSize(400,400);
+      frame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
       frame.setLocationRelativeTo(null);
       frame.setVisible(true);
+      frame.setResizable(false);
+      JPanel panel = new JPanel(new BorderLayout());
+      Container contentPane = frame.getContentPane();
+      contentPane.setLayout(new FlowLayout());
+      for(int i = 0; i < BLACK_KEYS; i++){
+         JButton button = new JButton(blackKeyI);
+         button.setBorderPainted(false);
+         button.setContentAreaFilled(false);
+         frame.add(button);
+      }          
    }
 }
