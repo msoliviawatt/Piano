@@ -6,6 +6,10 @@ import java.util.*;
    
 public class PianoLayout 
 {
+
+   final static int SCREEN_WIDTH = 1300;
+   final static int SCREEN_HEIGHT = 300;
+
    private static JLayeredPane initComponents()
    {
       JLayeredPane layer = new JLayeredPane();
@@ -33,7 +37,7 @@ public class PianoLayout
       Icon whiteKeyIcon = new ImageIcon("WhiteKey.png");
       JButton whiteKey = new JButton(whiteKeyIcon);
       whiteKey.setBorder(new LineBorder(Color.BLACK));
-      whiteKey.setLocation(i*40,0);
+      whiteKey.setLocation(i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
       return whiteKey;
    }
@@ -42,7 +46,7 @@ public class PianoLayout
    {
       Icon blackKeyIcon = new ImageIcon("BlackKey.png");
       JButton blackKey = new JButton(blackKeyIcon);
-      blackKey.setLocation(25 + i*40,0);
+      blackKey.setLocation(SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
       return blackKey;
    }
@@ -50,11 +54,9 @@ public class PianoLayout
    {
       JPanel panel = new JPanel(null);
       JFrame mainFrame = new JFrame();
-      // mainFrame
-      // PianoLayout pianoLayout = new PianoLayout();
       mainFrame.add(panel);
       panel.add(initComponents());
-      mainFrame.setSize(500,500);
+      mainFrame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
       mainFrame.setVisible(true);
    }
 
