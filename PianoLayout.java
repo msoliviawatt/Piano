@@ -4,13 +4,10 @@ import java.util.*;
    
 public class PianoLayout 
 {
- 
-
-
    private static JLayeredPane initComponents()
    {
       JLayeredPane layer = new JLayeredPane();
-    //ScrollableLayeredPane layer = new ScrollableLayeredPane();
+      //ScrollableLayeredPane layer = new ScrollableLayeredPane();
       layer.setSize(1120,1150);
       JButton[] keys = new JButton[48];
       int keyIndex = 0, i;
@@ -50,8 +47,8 @@ public class PianoLayout
    {
       JPanel panel = new JPanel(null);
       JFrame mainFrame = new JFrame();
-      mainFrame
-      PianoLayout pianoLayout = new PianoLayout();
+      // mainFrame
+      // PianoLayout pianoLayout = new PianoLayout();
       mainFrame.add(panel);
       panel.add(initComponents());
       mainFrame.setSize(500,500);
