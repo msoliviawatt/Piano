@@ -1,59 +1,61 @@
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
+import java.util.*;
+   
+public class PianoLayout 
+{
+ 
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLayeredPane;
-import javax.swing.JScrollPane;
 
-public class PianoLayout extends JScrollPane {
-    public PianoLayout() {
-        initComponents();
-    }
+   private static JLayeredPane initComponents()
+   {
+      JLayeredPane layer = new JLayeredPane();
+    //ScrollableLayeredPane layer = new ScrollableLayeredPane();
+      layer.setSize(1120,1150);
+      JButton[] keys = new JButton[48];
+      int keyIndex = 0, i;
+   
+      for(i=0;i<28;i++)
+      {
+         keys[keyIndex] = createWhiteKey(i);
+         layer.add(keys[keyIndex], 0, -1);
+         keyIndex+=1;
+         if(i%7!=2 && i%7!=6)
+         {
+            keys[keyIndex] = createBlackKey(i);
+            layer.add(keys[keyIndex], 1, -1);
+            keyIndex+=1;
+         }
+      }
+      return layer;
+   }
+   private static JButton createWhiteKey(int i)
+   {
+      JButton whiteKey = new JButton();
+      whiteKey.setBackground(Color.WHITE);
+      whiteKey.setLocation(i*40,0);
+      whiteKey.setSize(40, 150);
+      return whiteKey;
+   }
 
-    public PianoLayout(Piano piano) {
-        initComponents();
-    }
+   private static JButton createBlackKey(int i)
+   {
+      JButton blackKey = new JButton();
+      blackKey.setBackground(Color.BLACK);
+      blackKey.setLocation(25 + i*40,0);
+      blackKey.setSize(30, 90);
+      return blackKey;
+   }
+    public static void main(String[] args)
+   {
+      JPanel panel = new JPanel(null);
+      JFrame mainFrame = new JFrame();
+      mainFrame
+      PianoLayout pianoLayout = new PianoLayout();
+      mainFrame.add(panel);
+      panel.add(initComponents());
+      mainFrame.setSize(500,500);
+      mainFrame.setVisible(true);
+   }
 
-    private void initComponents() {
-        JLayeredPane layer = new JLayeredPane();
-        layer.setSize(1120,150);
-        JButton[] keys = new JButton[48];
-        int keyIndex = 0, i;
-
-            for(i=0;i<28;i++)
-            {
-                keys[keyIndex] = createWhiteKey(i);
-                layer.add(keys[keyIndex], 0, -1);
-                keyIndex+=1;
-                if(i%7!=2 && i%7!=6)
-                {
-                    keys[keyIndex] = createBlackKey(i);
-                    layer.add(keys[keyIndex], 1, -1);
-                    keyIndex+=1;
-                }
-            }
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        this.setViewportView(layer);
-        setSize(280, 150);     
-        setLocation(110,100);
-    }
-
-    ImageIcon bk = new ImageIcon("blackKey.png");
-    ImageIcon wk = new ImageIcon("whiteKey.png");
-
-    private JButton createBlackKey(int x) {
-        JButton blackKey = new JButton();
-        blackKey.setIcon(bk);
-        blackKey.setBackground(Color.BLACK);
-        blackKey.setOpaque(true);
-        return blackKey;
-    }
-
-    private JButton createWhiteKey(int x) {
-        JButton whiteKey = new JButton();
-        whiteKey.setIcon(wk);
-        whiteKey.setBackground(Color.WHITE);
-        whiteKey.setOpaque(true);
-        return whiteKey;
-    }
 }
