@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import java.awt.*;
 import java.util.*;
    
@@ -28,8 +30,9 @@ public class PianoLayout
    }
    private static JButton createWhiteKey(int i)
    {
-      JButton whiteKey = new JButton();
-      whiteKey.setBackground(Color.WHITE);
+      Icon whiteKeyIcon = new ImageIcon("WhiteKey.png");
+      JButton whiteKey = new JButton(whiteKeyIcon);
+      whiteKey.setBorder(new LineBorder(Color.BLACK));
       whiteKey.setLocation(i*40,0);
       whiteKey.setSize(40, 150);
       return whiteKey;
@@ -37,8 +40,8 @@ public class PianoLayout
 
    private static JButton createBlackKey(int i)
    {
-      JButton blackKey = new JButton();
-      blackKey.setBackground(Color.BLACK);
+      Icon blackKeyIcon = new ImageIcon("BlackKey.png");
+      JButton blackKey = new JButton(blackKeyIcon);
       blackKey.setLocation(25 + i*40,0);
       blackKey.setSize(30, 90);
       return blackKey;
