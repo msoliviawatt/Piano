@@ -58,6 +58,7 @@ public class PianoLayout
       panel.add(initComponents());
       mainFrame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
       mainFrame.setVisible(true);
+      mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }
 
 }
