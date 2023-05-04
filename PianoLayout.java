@@ -61,14 +61,13 @@ public class PianoLayout
       mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }
 
-   public String whiteKeyNames(int i) {
+   public String whiteKeyName(int i) {
       String[] whiteKeyNames = {"C","D","E","F","G","A","B"};
       return whiteKeyNames[i%7];
    }
 
-   public String blackKeyNames(int i) {
+   public String blackKeyName(int i) {
       String[] blackKeyNames = {"C#","D#","F#","G#","A#"};
       return blackKeyNames[i%5];
    }
-
 }
