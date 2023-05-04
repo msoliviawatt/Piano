@@ -2,7 +2,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import java.awt.*;
-import java.util.*;
+// import java.util.*;
    
 public class PianoLayout 
 {
@@ -59,6 +59,16 @@ public class PianoLayout
       mainFrame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
       mainFrame.setVisible(true);
       mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   }
+
+   public String whiteKeyNames(int i) {
+      String[] whiteKeyNames = {"C","D","E","F","G","A","B"};
+      return whiteKeyNames[i%7];
+   }
+
+   public String blackKeyNames(int i) {
+      String[] blackKeyNames = {"C#","D#","F#","G#","A#"};
+      return blackKeyNames[i%5];
    }
 
 }
