@@ -84,6 +84,7 @@ public class PianoLayout {
             keyIndex+=1;
          }
       }
+      layer.setBounds(120, 140, 1120, 200);
       return layer;
    }
 
@@ -105,7 +106,7 @@ public class PianoLayout {
    }
     public static void main(String[] args) {
       JPanel panel = new JPanel(null);
-      JFrame mainFrame = new JFrame();
+      JFrame mainFrame = new JFrame("Piano");
       mainFrame.add(panel);
       panel.add(initComponents());
       mainFrame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
