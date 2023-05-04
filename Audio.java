@@ -2,7 +2,7 @@ import java.io.*;
 import javax.sound.sampled.*;
 
 //this class is for the sound effects
-public class SoundEffect {
+public class Audio {
     public static void playSound(String filename) {
         try {
             File soundFile = new File(filename); //creates a new sound file

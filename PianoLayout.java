@@ -24,7 +24,6 @@ public class PianoLayout {
 
    public static JLayeredPane initComponents() {
       JLayeredPane layer = new JLayeredPane();
-      //ScrollableLayeredPane layer = new ScrollableLayeredPane();
       layer.setSize(1120,1150);
       Key[] keys = new Key[48];
       int keyIndex = 0, i;

@@ -1,7 +1,7 @@
 import java.io.File;
 import javax.swing.JButton;
 
-public class Key extends SoundEffect {
+public class Key extends Audio {
     private int totalKeys = 48;
     private String keyName;
     private File audioFile;
