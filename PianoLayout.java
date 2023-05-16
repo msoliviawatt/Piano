@@ -32,7 +32,7 @@ public class PianoLayout {
       {
          JButton whiteKey = createWhiteKey(i);
          String whi = whiteKeyName(i);
-         keys[keyIndex].setButton(whiteKey);
+         keys[keyIndex] = new Key(whi, whiteKey);
          if(whi.equals("A")) {
             counterA++;
             whi = whi + counterA;
@@ -62,7 +62,7 @@ public class PianoLayout {
          {
             JButton blackKey = createBlackKey(i);
             String bhi = blackKeyName(i);
-            keys[keyIndex].setButton(blackKey);
+            keys[keyIndex] = new Key(bhi, blackKey);
             if(bhi.equals("C#")) {
                counterSharpC++;
                bhi = bhi + counterSharpC;
@@ -84,7 +84,6 @@ public class PianoLayout {
             keyIndex+=1;
          }
       }
-      layer.setBounds(120, 140, 1120, 200);
       return layer;
    }
 
@@ -106,7 +105,7 @@ public class PianoLayout {
    }
     public static void main(String[] args) {
       JPanel panel = new JPanel(null);
-      JFrame mainFrame = new JFrame("Piano");
+      JFrame mainFrame = new JFrame();
       mainFrame.add(panel);
       panel.add(initComponents());
       mainFrame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
