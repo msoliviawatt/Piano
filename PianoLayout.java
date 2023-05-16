@@ -3,7 +3,7 @@ import javax.swing.border.LineBorder;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
+import javax.swing.Timer;
    
 public class PianoLayout extends Canvas implements KeyListener {
    private BufferStrategy strategy;
@@ -89,27 +89,58 @@ public class PianoLayout extends Canvas implements KeyListener {
          public void windowClosing(WindowEvent e) {System.exit(0);} 
       });
 
-      render();
-   }
+      addKeyListener(this);
 
-   public void render() {
-      //renders # of frames in the background then shows them in order
-      //the parameter is the number of frames that are cycled through
-      createBufferStrategy(2);
-      strategy = getBufferStrategy();
-      Graphics g = null;
-      do {
-         try{
-            g =  strategy.getDrawGraphics();
+      int delay = 50;
 
-         } finally {
-            paint(g);
+      ActionListener taskPerformer = new ActionListener() {
+         public void actionPerformed(ActionEvent actionEvent) {
+            if (A2) {
+               Audio.playSound("A2.mp3");
+            } if (A3) {
+               Audio.playSound("A3.mp3");
+            } if (A4) {
+               Audio.playSound("A4.mp3");
+            } if (A5) {
+               Audio.playSound("A5.mp3");
+            } if (C2) {
+               Audio.playSound("C2.mp3");
+            }
          }
-         strategy.show();
-         g.dispose();
-      } while (strategy.contentsLost());
-      Toolkit.getDefaultToolkit().sync();
-   }  
+      };
+
+      new Timer(delay, taskPerformer).start();
+
+      requestFocusInWindow();}
+
+      public void keyPressed(KeyEvent e) {
+         if(e.getKeyCode() == KeyEvent.VK_1) {
+            C2 = true;
+         }
+      }
+   
+      public void keyReleased(KeyEvent e) {
+         if(e.getKeyCode() == KeyEvent.VK_1) {
+            C2 = false;
+         }
+      }
+   
+      public void keyTyped(KeyEvent e) {
+      }
+
+   //key events
+   // public void keyPressed(KeyEvent e) {
+   //    if(e.getKeyCode() == KeyEvent.VK_1) {
+   //       C2 = true;
+   //    }
+   // }
+
+   // public void keyReleased(KeyEvent e) {
+   // }
+
+   // public void keyTyped(KeyEvent e) {
+   // }
+ 
    public static JLayeredPane initComponents() {
       JLayeredPane layer = new JLayeredPane();
       layer.setSize(1120,1150);
@@ -218,37 +249,8 @@ public class PianoLayout extends Canvas implements KeyListener {
       return blackKeyNames[i%5];
    }
 
-   //key events
-   public void keyPressed(KeyEvent e) {
-      if(e.getKeyCode() == KeyEvent.VK_A) {
-         A2 = true;
-      }
-   }
-
-   public void keyReleased(KeyEvent e) {
-   }
-
-   public void keyTyped(KeyEvent e) {
-   }
-
-   ActionListener actionListener = new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-         if (A2) {
-            Audio.playSound("A2.mp3");
-         } if (A3) {
-            Audio.playSound("A3.mp3");
-         } if (A4) {
-            Audio.playSound("A4.mp3");
-         } if (A5) {
-            Audio.playSound("A5.mp3");
-         }
-         render();
-      }
-   };
-
    public static void main(String[] args) {
+      Audio.playSound("C5.mp3");
       new PianoLayout();
    }
-
-   
 }
