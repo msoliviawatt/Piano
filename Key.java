@@ -2,7 +2,7 @@ import java.io.File;
 import javax.swing.JButton;
 
 public class Key extends Audio {
-    private int totalKeys = 48;
+    private static int totalKeys = 48;
     private String keyName;
     private File audioFile;
     private JButton keyButton;
@@ -38,7 +38,7 @@ public class Key extends Audio {
         keyButton = b;
     }
 
-    public Key[] keys = new Key[totalKeys];
+    public static Key[] keys = new Key[totalKeys];
 
     public void playKey(int index, String keyName) {
         if (index < totalKeys) {

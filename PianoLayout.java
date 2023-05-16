@@ -19,7 +19,7 @@ public class PianoLayout {
    static int counterSharpA = 0;
 
 
-   final static int SCREEN_WIDTH = 1300;
+   final static int SCREEN_WIDTH = 1120;
    final static int SCREEN_HEIGHT = 300;
 
    public static JLayeredPane initComponents() {
@@ -28,7 +28,7 @@ public class PianoLayout {
       Key[] keys = new Key[48];
       int keyIndex = 0, i;
    
-      for(i=0;i<28;i++)
+      for(i=0; i<28; i++)
       {
          JButton whiteKey = createWhiteKey(i);
          String whi = whiteKeyName(i);
@@ -57,8 +57,8 @@ public class PianoLayout {
          }
          keys[keyIndex].setKey(whi);
          layer.add(keys[keyIndex].getButton(), 0, -1);
-         keyIndex+=1;
-         if(i%7!=2 && i%7!=6)
+         keyIndex += 1;
+         if(i % 7 != 2 && i % 7 != 6)
          {
             JButton blackKey = createBlackKey(i);
             String bhi = blackKeyName(i);
@@ -82,6 +82,9 @@ public class PianoLayout {
             keys[keyIndex].setKey(bhi);
             layer.add(keys[keyIndex].getButton(), 1, -1);
             keyIndex+=1;
+
+            //temporary thing
+            System.out.println(keys[i].getKey());
          }
       }
       return layer;
@@ -106,6 +109,8 @@ public class PianoLayout {
     public static void main(String[] args) {
       JPanel panel = new JPanel(null);
       JFrame mainFrame = new JFrame();
+      mainFrame.pack();
+      mainFrame.setLocationRelativeTo(null);
       mainFrame.add(panel);
       panel.add(initComponents());
       mainFrame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
