@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import java.awt.*;
+import java.awt.event.*;
 // import java.util.*;
    
 public class PianoLayout {
@@ -96,6 +97,13 @@ public class PianoLayout {
       whiteKey.setBorder(new LineBorder(Color.BLACK));
       whiteKey.setLocation(i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
+       whiteKey.addActionListener(
+         new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               System.out.println("hello");
+            }
+         });
+
       return whiteKey;
    }
 
@@ -104,6 +112,12 @@ public class PianoLayout {
       JButton blackKey = new JButton(blackKeyIcon);
       blackKey.setLocation(SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
+      blackKey.addActionListener(
+         new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               System.out.println("hello");
+            }
+         });
       return blackKey;
    }
     public static void main(String[] args) {
