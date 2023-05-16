@@ -1,13 +1,10 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import java.awt.image.BufferStrategy;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.Timer;
    
 public class PianoLayout extends Canvas implements KeyListener {
-   private BufferStrategy strategy;
-
    //counters
    static int counterA = 0;
    static int counterB = 0;
