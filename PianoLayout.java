@@ -100,8 +100,6 @@ public class PianoLayout extends Canvas implements KeyListener {
                Audio.playSound("A4.mp3");
             } if (A5) {
                Audio.playSound("A5.mp3");
-            } if (C2) {
-               Audio.playSound("C2.mp3");
             }
          }
       };
@@ -247,7 +245,6 @@ public class PianoLayout extends Canvas implements KeyListener {
    }
 
    public static void main(String[] args) {
-      Audio.playSound("C5.mp3");
       new PianoLayout();
    }
 }
