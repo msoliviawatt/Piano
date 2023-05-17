@@ -12,3 +12,6 @@ To Do List:
 
 Week One:
 - Create basic piano structure/image/object/whatever
+
+Week... Three?? Four??
+- 
