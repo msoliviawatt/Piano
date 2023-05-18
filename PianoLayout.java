@@ -86,6 +86,9 @@ public class PianoLayout extends Canvas implements KeyListener {
          public void windowClosing(WindowEvent e) {System.exit(0);} 
       });
 
+      requestFocus();
+      setFocusable(true);
+
       addKeyListener(this);
 
       int delay = 50;
@@ -93,13 +96,15 @@ public class PianoLayout extends Canvas implements KeyListener {
       ActionListener taskPerformer = new ActionListener() {
          public void actionPerformed(ActionEvent actionEvent) {
             if (A2) {
-               Audio.playSound("A2.mp3");
+               Audio.playSound("AudioFiles/A/A2.mp3");
             } if (A3) {
-               Audio.playSound("A3.mp3");
+               Audio.playSound("AudioFiles/A/A3.mp3");
             } if (A4) {
-               Audio.playSound("A4.mp3");
+               Audio.playSound("AudioFiles/A/A4.mp3");
             } if (A5) {
-               Audio.playSound("A5.mp3");
+               Audio.playSound("AudioFiles/A/A5.mp3");
+            } if (C2) {
+               Audio.playSound("AudioFiles/C/C2.mp3");
             }
          }
       };
@@ -107,17 +112,15 @@ public class PianoLayout extends Canvas implements KeyListener {
       new Timer(delay, taskPerformer).start();
 
       requestFocusInWindow();}
+      
 
       public void keyPressed(KeyEvent e) {
-         if(e.getKeyCode() == KeyEvent.VK_1) {
+         if(e.getKeyCode() == KeyEvent.VK_Q) {
             C2 = true;
          }
       }
    
       public void keyReleased(KeyEvent e) {
-         if(e.getKeyCode() == KeyEvent.VK_1) {
-            C2 = false;
-         }
       }
    
       public void keyTyped(KeyEvent e) {
@@ -213,6 +216,7 @@ public class PianoLayout extends Canvas implements KeyListener {
       whiteKey.addActionListener(
       new ActionListener() {
          public void actionPerformed(ActionEvent e) {
+            Audio.playSound("AudioFiles/A/A2.mp3");
             System.out.println("white key");
          }
       });
