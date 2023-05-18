@@ -1,15 +1,12 @@
-import java.io.*;
-import javax.sound.sampled.*;
+import jaco.mp3.player.MP3Player;
+import java.io.File;
 
-//this class is for the sound effects
 public class Audio {
     public static void playSound(String filename) {
         try {
-            File soundFile = new File(filename); //creates a new sound file
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile); //gets the audio input stream
-            Clip clip = AudioSystem.getClip(); //gets the clip
-            clip.open(audioIn); //opens the clip
-            clip.start(); //starts the clip
+            File file = new File(filename);
+            MP3Player mp3Player = new MP3Player(file);
+            mp3Player.play();
         } catch (Exception e) {
             e.printStackTrace();
         }
