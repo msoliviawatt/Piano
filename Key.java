@@ -1,7 +1,7 @@
 import java.io.File;
 import javax.swing.JButton;
 
-public class Key extends Audio {
+public class Key extends No {
     private static int totalKeys = 48;
     private String keyName;
     private File audioFile;
