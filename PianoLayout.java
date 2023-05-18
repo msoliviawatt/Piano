@@ -216,8 +216,9 @@ public class PianoLayout extends Canvas implements KeyListener {
       whiteKey.addActionListener(
       new ActionListener() {
          public void actionPerformed(ActionEvent e) {
+            Key temp = (Key) e.getSource();
+            System.out.println(temp.getKey());
             Audio.playSound("AudioFiles/A/A2.mp3");
-            System.out.println("white key");
          }
       });
 
@@ -229,12 +230,12 @@ public class PianoLayout extends Canvas implements KeyListener {
       JButton blackKey = new JButton(blackKeyIcon);
       blackKey.setLocation(SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
-      blackKey.addActionListener(
-      new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            System.out.println("black key");
-         }
-      });
+      // blackKey.addActionListener(
+      // new ActionListener() {
+      //    public void actionPerformed(ActionEvent e) {
+      //       System.out.println("black key");
+      //    }
+      // });
       return blackKey;
    }
 
