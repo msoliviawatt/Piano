@@ -91,118 +91,51 @@ public class PianoLayout extends Canvas implements KeyListener {
 
       addKeyListener(this);
 
-      int delay = 50;
-
-      ActionListener taskPerformer = new ActionListener() {
-         public void actionPerformed(ActionEvent actionEvent) {
-            if (A2) {
-               Audio.playSound("AudioFiles/A/A2.mp3");
-            } if (A3) {
-               Audio.playSound("AudioFiles/A/A3.mp3");
-            } if (A4) {
-               Audio.playSound("AudioFiles/A/A4.mp3");
-            } if (A5) {
-               Audio.playSound("AudioFiles/A/A5.mp3");
-            } if (C2) {
-               Audio.playSound("AudioFiles/C/C2.mp3");
-            }
-         }
-      };
-
-      new Timer(delay, taskPerformer).start();
-
       requestFocusInWindow();}
       
 
-      public void keyPressed(KeyEvent e) {
-         if(e.getKeyCode() == KeyEvent.VK_Q) {
-            C2 = true;
-         }
+   public void keyPressed(KeyEvent e) {
+      if(e.getKeyCode() == KeyEvent.VK_Q) {
+         C2 = true;
       }
-   
-      public void keyReleased(KeyEvent e) {
-      }
-   
-      public void keyTyped(KeyEvent e) {
-      }
+   }
 
-   //key events
-   // public void keyPressed(KeyEvent e) {
-   //    if(e.getKeyCode() == KeyEvent.VK_1) {
-   //       C2 = true;
-   //    }
-   // }
+   public void keyReleased(KeyEvent e) {
+   }
 
-   // public void keyReleased(KeyEvent e) {
-   // }
+   public void keyTyped(KeyEvent e) {
+   }
 
-   // public void keyTyped(KeyEvent e) {
-   // }
  
    public static JLayeredPane initComponents() {
       JLayeredPane layer = new JLayeredPane();
-      layer.setSize(1120,1150);
-      keys = new Key[48];
-      int keyIndex = 0, i;
-   
-      for(i=0; i<28; i++)
-      {
-         JButton whiteKey = createWhiteKey(i);
-         String whi = whiteKeyName(i);
-         keys[keyIndex] = new Key(whi, whiteKey);
-         if(whi.equals("A")) {
-            counterA++;
-            whi = whi + counterA;
-         } else if (whi.equals("B")) {
-            counterB++;
-            whi = whi + counterB;
-         } else if (whi.equals("C")) {
-            counterC++;
-            whi = whi + counterC;
-         } else if (whi.equals("D")) {
-            counterD++;
-            whi = whi + counterD;
-         } else if (whi.equals("E")) {
-            counterE++;
-            whi = whi + counterE;
-         } else if (whi.equals("F")) {
-            counterF++;
-            whi = whi + counterF;
-         } else if (whi.equals("G")) {
-            counterG++;
-            whi = whi + counterG;
-         }
-         keys[keyIndex].setKey(whi);
-         layer.add(keys[keyIndex].getButton(), 0, -1);
-         keyIndex += 1;
-         if(i % 7 != 2 && i % 7 != 6)
-         {
-            JButton blackKey = createBlackKey(i);
-            String bhi = blackKeyName(i);
-            keys[keyIndex] = new Key(bhi, blackKey);
-            if(bhi.equals("C#")) {
-               counterSharpC++;
-               bhi = bhi + counterSharpC;
-            } else if (bhi.equals("D#")) {
-               counterSharpD++;
-               bhi = bhi + counterSharpD;
-            } else if (bhi.equals("F#")) {
-               counterSharpF++;
-               bhi = bhi + counterSharpF;
-            } else if (bhi.equals("G#")) {
-               counterSharpG++;
-               bhi = bhi + counterSharpG;
-            } else if (bhi.equals("A#")) {
-               counterSharpA++;
-               bhi = bhi + counterSharpA;
-            }
-            keys[keyIndex].setKey(bhi);
-            layer.add(keys[keyIndex].getButton(), 1, -1);
-            keyIndex+=1;
+    layer.setSize(1120, 1150);
+    keys = new Key[48];
+    int keyIndex = 0, i;
 
-            //temporary thing
-            System.out.println(keys[i].getKey());
-         }
+    String[] whiteKeyNames = {"C", "D", "E", "F", "G", "A", "B"};
+    String[] blackKeyNames = {"C#", "D#", "F#", "G#", "A#"};
+
+    int octave = 3; // starting octave number
+
+    for (i = 0; i < 28; i++) {
+        JButton whiteKey = createWhiteKey(i);
+        String whi = whiteKeyName(i, whiteKeyNames, octave);
+        keys[keyIndex] = new Key(whi, whiteKey);
+        layer.add(keys[keyIndex].getButton(), 0, -1);
+        keyIndex += 1;
+        if (i % 7 != 2 && i % 7 != 6) {
+            JButton blackKey = createBlackKey(i);
+            String bhi = blackKeyName(i, blackKeyNames, octave);
+            keys[keyIndex] = new Key(bhi, blackKey);
+            layer.add(keys[keyIndex].getButton(), 1, -1);
+            keyIndex += 1;
+        }
+
+        // Update octave number
+        if (i % 7 == 6) {
+            octave++;
+        }
       }
       return layer;
    }
@@ -213,12 +146,6 @@ public class PianoLayout extends Canvas implements KeyListener {
       whiteKey.setBorder(new LineBorder(Color.BLACK));
       whiteKey.setLocation(i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
-      whiteKey.addActionListener(
-      new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            Audio.playSound("AudioFiles/A/A5.mp3");
-         }
-      });
 
       return whiteKey;
    }
@@ -228,24 +155,19 @@ public class PianoLayout extends Canvas implements KeyListener {
       JButton blackKey = new JButton(blackKeyIcon);
       blackKey.setLocation(SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
-      // blackKey.addActionListener(
-      // new ActionListener() {
-      //    public void actionPerformed(ActionEvent e) {
-      //       System.out.println("black key");
-      //    }
-      // });
+
       return blackKey;
    }
 
-   public static String whiteKeyName(int i) {
-      String[] whiteKeyNames = {"C","D","E","F","G","A","B"};
-      return whiteKeyNames[i%7];
-   }
-
-   public static String blackKeyName(int i) {
-      String[] blackKeyNames = {"C#","D#","F#","G#","A#"};
-      return blackKeyNames[i%5];
-   }
+   public static String whiteKeyName(int i, String[] whiteKeyNames, int octave) {
+      String keyName = whiteKeyNames[i % 7];
+      return keyName + octave;
+  }
+  
+  public static String blackKeyName(int i, String[] blackKeyNames, int octave) {
+      String keyName = blackKeyNames[i % 5];
+      return keyName + octave;
+  }
 
    public static void main(String[] args) {
       new PianoLayout();
