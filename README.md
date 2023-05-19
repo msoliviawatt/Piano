@@ -10,17 +10,17 @@ week one:
 week two:
 - do nothing
 
-week three
+week three:
 - do nothing
 
-week four
+week four:
 - do nothing
 
-week five
-- do something because it's due next week
+week five:
+- consider doing something because the project is due next week
 
 day before presentation
-- finish piano
+- do everything
 
 10 minutes before presentation
 - make presentation
