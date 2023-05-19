@@ -20,7 +20,7 @@ week five:
 - consider doing something because the project is due next week
 
 day before presentation
-- do everything
+- make piano
 
 10 minutes before presentation
 - make presentation
