@@ -19,8 +19,8 @@ week four:
 week five:
 - consider doing something because the project is due next week
 
-day before presentation
+day before presentation:
 - make piano
 
-10 minutes before presentation
+10 minutes before presentation:
 - make presentation
