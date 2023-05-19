@@ -1,17 +1,26 @@
 # Piano-Project
 
-It's supposed to be a piano
+Name of Project: Piano (yes)
 
-To Do List:
-- Learn how to do MIDI things
-- Import audio
-- KeyListener stuff
-- Make key objects
-- Clicky things with mouse
-- Key pressing animations
+to do list:
 
-Week One:
-- Create basic piano structure/image/object/whatever
+week one:
+- do nothing
 
-Week... Three?? Four??
-- 
+week two:
+- do nothing
+
+week three
+- do nothing
+
+week four
+- do nothing
+
+week five
+- do something because it's due next week
+
+day before presentation
+- finish piano
+
+10 minutes before presentation
+- make presentation
