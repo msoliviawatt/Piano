@@ -72,8 +72,8 @@ public class PianoLayout extends Canvas implements KeyListener {
    static boolean Gs4 = false;
    static boolean Gs5 = false;
 
-   final static int SCREEN_WIDTH = 1120;
-   final static int SCREEN_HEIGHT = 300;
+   final static int SCREEN_WIDTH = 1300;
+   final static int SCREEN_HEIGHT = 500;
 
    public PianoLayout() {
       JFrame frame = new JFrame("Piano");
@@ -82,15 +82,17 @@ public class PianoLayout extends Canvas implements KeyListener {
       frame.add(initComponents());
       frame.setVisible(true);
       frame.setResizable(false);
-      frame.addWindowListener(new WindowAdapter() { 
-         public void windowClosing(WindowEvent e) {System.exit(0);} 
-      });
-
+      frame.addWindowListener(
+         new WindowAdapter() { 
+            public void windowClosing(WindowEvent e) {System.exit(0);} 
+         });
+      frame.setLocationRelativeTo(null);
+   
       requestFocus();
       setFocusable(true);
-
+   
       addKeyListener(this);
-
+   
       requestFocusInWindow();}
       
 
@@ -109,33 +111,37 @@ public class PianoLayout extends Canvas implements KeyListener {
  
    public static JLayeredPane initComponents() {
       JLayeredPane layer = new JLayeredPane();
-    layer.setSize(1120, 1150);
-    keys = new Key[48];
-    int keyIndex = 0, i;
-
-    String[] whiteKeyNames = {"C", "D", "E", "F", "G", "A", "B"};
-    String[] blackKeyNames = {"C#", "D#", "F#", "G#", "A#"};
-
-    int octave = 3; // starting octave number
-
-    for (i = 0; i < 28; i++) {
-        JButton whiteKey = createWhiteKey(i);
-        String whi = whiteKeyName(i, whiteKeyNames, octave);
-        keys[keyIndex] = new Key(whi, whiteKey);
-        layer.add(keys[keyIndex].getButton(), 0, -1);
-        keyIndex += 1;
-        if (i % 7 != 2 && i % 7 != 6) {
+      layer.setSize(1120, 1150);
+      keys = new Key[48];
+      int keyIndex = 0, i;
+      ImageIcon backgroundImage = new ImageIcon("wood.jpg");
+      JLabel backgroundLabel = new JLabel(backgroundImage);
+      backgroundLabel.setBounds(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+      layer.add(backgroundLabel, Integer.valueOf(Integer.MIN_VALUE));
+   
+      String[] whiteKeyNames = {"C", "D", "E", "F", "G", "A", "B"};
+      String[] blackKeyNames = {"C#", "D#", "F#", "G#", "A#"};
+   
+      int octave = 3; // starting octave number
+   
+      for (i = 0; i < 28; i++) {
+         JButton whiteKey = createWhiteKey(i);
+         String whi = whiteKeyName(i, whiteKeyNames, octave);
+         keys[keyIndex] = new Key(whi, whiteKey);
+         layer.add(keys[keyIndex].getButton(), 0, -1);
+         keyIndex += 1;
+         if (i % 7 != 2 && i % 7 != 6) {
             JButton blackKey = createBlackKey(i);
             String bhi = blackKeyName(i, blackKeyNames, octave);
             keys[keyIndex] = new Key(bhi, blackKey);
             layer.add(keys[keyIndex].getButton(), 1, -1);
             keyIndex += 1;
-        }
-
+         }
+      
         // Update octave number
-        if (i % 7 == 6) {
+         if (i % 7 == 6) {
             octave++;
-        }
+         }
       }
       return layer;
    }
@@ -144,30 +150,30 @@ public class PianoLayout extends Canvas implements KeyListener {
       Icon whiteKeyIcon = new ImageIcon("WhiteKey.png");
       JButton whiteKey = new JButton(whiteKeyIcon);
       whiteKey.setBorder(new LineBorder(Color.BLACK));
-      whiteKey.setLocation(i*40, SCREEN_HEIGHT/4);
+      whiteKey.setLocation(90 + i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
-
+   
       return whiteKey;
    }
 
    public static JButton createBlackKey(int i) {
       Icon blackKeyIcon = new ImageIcon("BlackKey.png");
       JButton blackKey = new JButton(blackKeyIcon);
-      blackKey.setLocation(SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
+      blackKey.setLocation(90 + SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
-
+   
       return blackKey;
    }
 
    public static String whiteKeyName(int i, String[] whiteKeyNames, int octave) {
       String keyName = whiteKeyNames[i % 7];
       return keyName + octave;
-  }
+   }
   
-  public static String blackKeyName(int i, String[] blackKeyNames, int octave) {
+   public static String blackKeyName(int i, String[] blackKeyNames, int octave) {
       String keyName = blackKeyNames[i % 5];
       return keyName + octave;
-  }
+   }
 
    public static void main(String[] args) {
       new PianoLayout();
