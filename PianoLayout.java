@@ -114,11 +114,7 @@ public class PianoLayout extends Canvas implements KeyListener {
       layer.setSize(1120, 1150);
       keys = new Key[48];
       int keyIndex = 0, i;
-      ImageIcon backgroundImage = new ImageIcon("wood.jpg");
-      JLabel backgroundLabel = new JLabel(backgroundImage);
-      backgroundLabel.setBounds(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-      layer.add(backgroundLabel, Integer.valueOf(Integer.MIN_VALUE));
-   
+            
       String[] whiteKeyNames = {"C", "D", "E", "F", "G", "A", "B"};
       String[] blackKeyNames = {"C#", "D#", "F#", "G#", "A#"};
    
