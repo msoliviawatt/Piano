@@ -3,80 +3,18 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.Timer;
+import java.util.HashMap;
    
 public class PianoLayout extends Canvas implements KeyListener {
-   //counters
-   static int counterA = 0;
-   static int counterB = 0;
-   static int counterC = 0;
-   static int counterD = 0;
-   static int counterE = 0;
-   static int counterF = 0;
-   static int counterG = 0;
-   static int counterSharpC = 0;
-   static int counterSharpD = 0;
-   static int counterSharpF = 0;
-   static int counterSharpG = 0;
-   static int counterSharpA = 0;
-   static Key[] keys;
 
-   //keys
-   static boolean isPressed = false;
-   static boolean isReleased = false;
-   static boolean A2 = false;
-   static boolean A3 = false;
-   static boolean A4 = false;
-   static boolean A5 = false;
-   static boolean As2 = false;
-   static boolean As3 = false;
-   static boolean As4 = false;
-   static boolean As5 = false;
-   static boolean B2 = false;
-   static boolean B3 = false;
-   static boolean B4 = false;
-   static boolean B5 = false;
-   static boolean C2 = false;
-   static boolean C3 = false;
-   static boolean C4 = false;
-   static boolean C5 = false;
-   static boolean Cs2 = false;
-   static boolean Cs3 = false;
-   static boolean Cs4 = false;
-   static boolean Cs5 = false;
-   static boolean D2 = false;
-   static boolean D3 = false;
-   static boolean D4 = false;
-   static boolean D5 = false;
-   static boolean Ds2 = false;
-   static boolean Ds3 = false;
-   static boolean Ds4 = false;
-   static boolean Ds5 = false;
-   static boolean E2 = false;
-   static boolean E3 = false;
-   static boolean E4 = false;
-   static boolean E5 = false;
-   static boolean F2 = false;
-   static boolean F3 = false;
-   static boolean F4 = false;
-   static boolean F5 = false;
-   static boolean Fs2 = false;
-   static boolean Fs3 = false;
-   static boolean Fs4 = false;
-   static boolean Fs5 = false;
-   static boolean G2 = false;
-   static boolean G3 = false;
-   static boolean G4 = false;
-   static boolean G5 = false;
-   static boolean Gs2 = false;
-   static boolean Gs3 = false;
-   static boolean Gs4 = false;
-   static boolean Gs5 = false;
+   static Key[] keys;
+   static HashMap<Integer, String> keyFile = null;
 
    final static int SCREEN_WIDTH = 1300;
    final static int SCREEN_HEIGHT = 500;
-
+   static JFrame frame = null;
    public PianoLayout() {
-      JFrame frame = new JFrame("Piano");
+      frame = new JFrame("Piano");
       frame.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
       frame.getContentPane().setBackground(Color.GRAY);
       frame.add(initComponents());
@@ -88,18 +26,21 @@ public class PianoLayout extends Canvas implements KeyListener {
          });
       frame.setLocationRelativeTo(null);
    
-      requestFocus();
-      setFocusable(true);
+      //requestFocus();
+      //setFocusable(true);
    
-      addKeyListener(this);
+      frame.addKeyListener(this);
    
-      requestFocusInWindow();}
+      frame.requestFocusInWindow();
+   }
       
 
    public void keyPressed(KeyEvent e) {
-      if(e.getKeyCode() == KeyEvent.VK_Q) {
-         C2 = true;
-      }
+      int key = e.getKeyCode();
+      System.out.println(key);
+      String fileName = keyFile.get(key);
+      if(fileName != null)
+         Audio.playSound("AudioFiles/" + fileName);
    }
 
    public void keyReleased(KeyEvent e) {
@@ -107,7 +48,7 @@ public class PianoLayout extends Canvas implements KeyListener {
 
    public void keyTyped(KeyEvent e) {
    }
-
+   
  
    public static JLayeredPane initComponents() {
       JLayeredPane layer = new JLayeredPane();
@@ -119,7 +60,7 @@ public class PianoLayout extends Canvas implements KeyListener {
       String[] blackKeyNames = {"C#", "D#", "F#", "G#", "A#"};
    
       int octave = 3; // starting octave number
-   
+      int blackKeyIndex = 0;
       for (i = 0; i < 28; i++) {
          JButton whiteKey = createWhiteKey(i);
          String whi = whiteKeyName(i, whiteKeyNames, octave);
@@ -128,10 +69,11 @@ public class PianoLayout extends Canvas implements KeyListener {
          keyIndex += 1;
          if (i % 7 != 2 && i % 7 != 6) {
             JButton blackKey = createBlackKey(i);
-            String bhi = blackKeyName(i, blackKeyNames, octave);
+            String bhi = blackKeyName(blackKeyIndex, blackKeyNames, octave);
             keys[keyIndex] = new Key(bhi, blackKey);
             layer.add(keys[keyIndex].getButton(), 1, -1);
             keyIndex += 1;
+            blackKeyIndex++;
          }
       
         // Update octave number
@@ -139,6 +81,59 @@ public class PianoLayout extends Canvas implements KeyListener {
             octave++;
          }
       }
+     
+     // Initiate Key-Filename mapping
+      keyFile = new HashMap();
+      keyFile.put(KeyEvent.VK_1, "C3.mp3");
+      keyFile.put(KeyEvent.VK_2, "C#3.mp3");
+      keyFile.put(KeyEvent.VK_3, "D3.mp3");
+      keyFile.put(KeyEvent.VK_4, "D#3.mp3");
+      keyFile.put(KeyEvent.VK_5, "E3.mp3");
+      keyFile.put(KeyEvent.VK_6, "F3.mp3");
+      keyFile.put(KeyEvent.VK_7, "F#3.mp3");
+      keyFile.put(KeyEvent.VK_8, "G3.mp3");
+      keyFile.put(KeyEvent.VK_9, "G#3.mp3");
+      keyFile.put(KeyEvent.VK_0, "A3.mp3");
+      keyFile.put(KeyEvent.VK_MINUS, "A#3.mp3");
+      keyFile.put(KeyEvent.VK_EQUALS, "B3.mp3");
+      keyFile.put(KeyEvent.VK_TAB, "C4.mp3");
+      keyFile.put(KeyEvent.VK_Q, "C#4.mp3");
+      keyFile.put(KeyEvent.VK_W, "D4.mp3");
+      keyFile.put(KeyEvent.VK_E, "D#4.mp3");
+      keyFile.put(KeyEvent.VK_R, "E4.mp3");
+      keyFile.put(KeyEvent.VK_T, "F4.mp3");
+      keyFile.put(KeyEvent.VK_Y, "F#4.mp3");
+      keyFile.put(KeyEvent.VK_U, "G4.mp3");
+      keyFile.put(KeyEvent.VK_I, "G#4.mp3");
+      keyFile.put(KeyEvent.VK_O, "A4.mp3");
+      keyFile.put(KeyEvent.VK_P, "A#4.mp3");
+      keyFile.put(KeyEvent.VK_OPEN_BRACKET, "B4.mp3");
+      keyFile.put(KeyEvent.VK_CLOSE_BRACKET, "C5.mp3");
+      keyFile.put(KeyEvent.VK_BACK_SLASH, "C#5.mp3");
+      keyFile.put(KeyEvent.VK_CAPS_LOCK, "D3.mp3");
+      keyFile.put(KeyEvent.VK_A, "D#5.mp3");
+      keyFile.put(KeyEvent.VK_S, "E5.mp3");
+      keyFile.put(KeyEvent.VK_D, "F5.mp3");
+      keyFile.put(KeyEvent.VK_F, "F#5.mp3");
+      keyFile.put(KeyEvent.VK_G, "G5.mp3");
+      keyFile.put(KeyEvent.VK_H, "G#5.mp3");
+      keyFile.put(KeyEvent.VK_J, "A5.mp3");
+      keyFile.put(KeyEvent.VK_K, "A#5.mp3");
+      keyFile.put(KeyEvent.VK_L, "B5.mp3");
+      keyFile.put(KeyEvent.VK_SEMICOLON, "C6.mp3");
+      keyFile.put(KeyEvent.VK_SHIFT, "C#6.mp3");
+      keyFile.put(KeyEvent.VK_Z, "D6.mp3");
+      keyFile.put(KeyEvent.VK_X, "D#6.mp3");
+      keyFile.put(KeyEvent.VK_C, "E6.mp3");
+      keyFile.put(KeyEvent.VK_V, "F6.mp3");
+      keyFile.put(KeyEvent.VK_B, "F#6.mp3");
+      keyFile.put(KeyEvent.VK_N, "G6.mp3");
+      keyFile.put(KeyEvent.VK_M, "G#6.mp3");
+      keyFile.put(KeyEvent.VK_COMMA, "A6.mp3");
+      keyFile.put(KeyEvent.VK_PERIOD, "A#6.mp3");
+      keyFile.put(KeyEvent.VK_SLASH, "B6.mp3"); 
+           
+     
       return layer;
    }
 
@@ -170,6 +165,7 @@ public class PianoLayout extends Canvas implements KeyListener {
       String keyName = blackKeyNames[i % 5];
       return keyName + octave;
    }
+  
 
    public static void main(String[] args) {
       new PianoLayout();
