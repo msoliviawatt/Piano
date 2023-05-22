@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.Timer;
 import java.util.HashMap;
    
 public class PianoLayout extends Canvas implements KeyListener {
@@ -12,6 +13,9 @@ public class PianoLayout extends Canvas implements KeyListener {
    final static int SCREEN_WIDTH = 1300;
    final static int SCREEN_HEIGHT = 500;
    static JFrame frame = null;
+   static String[] whiteKeyboard = {"`", "2", "4", "5", "7", "9", "-", "=", "W", "R", "T", "U", "O", "[", "]", "CAPS LOCK", "S", "D", "G", "J", "L", ";", "Z", "C", "V", "N", ",", "/"};
+   static String[] blackKeyboard = {"1", "3", "6", "8", "0", "Q", "E", "Y", "I", "P", "\\", "A", "F", "H", "K", "SHIFT", "X", "B", "M", "."};
+
    public PianoLayout() {
       frame = new JFrame("Piano");
       JLabel contentPane = new JLabel();
@@ -34,7 +38,6 @@ public class PianoLayout extends Canvas implements KeyListener {
       //setFocusable(true);
    
       frame.addKeyListener(this);
-   
       frame.requestFocusInWindow();
    }
       
@@ -66,7 +69,6 @@ public class PianoLayout extends Canvas implements KeyListener {
             
       String[] whiteKeyNames = {"C", "D", "E", "F", "G", "A", "B"};
       String[] blackKeyNames = {"C#", "D#", "F#", "G#", "A#"};
-   
       int octave = 3; // starting octave number
       int blackKeyIndex = 0;
       for (i = 0; i < 28; i++) {
@@ -76,7 +78,7 @@ public class PianoLayout extends Canvas implements KeyListener {
          layer.add(keys[keyIndex].getButton(), 0, -1);
          keyIndex += 1;
          if (i % 7 != 2 && i % 7 != 6) {
-            JButton blackKey = createBlackKey(i);
+            JButton blackKey = createBlackKey(i, blackKeyIndex);
             String bhi = blackKeyName(blackKeyIndex, blackKeyNames, octave);
             keys[keyIndex] = new Key(bhi, blackKey);
             layer.add(keys[keyIndex].getButton(), 1, -1);
@@ -91,7 +93,7 @@ public class PianoLayout extends Canvas implements KeyListener {
       }
      
      // Initiate Key-Filename mapping
-      keyFile = new HashMap<Integer, String>();
+      keyFile = new HashMap();
       keyFile.put(KeyEvent.VK_BACK_QUOTE, "C3.mp3");
       keyFile.put(KeyEvent.VK_1, "C#3.mp3");
       keyFile.put(KeyEvent.VK_2, "D3.mp3");
@@ -147,7 +149,9 @@ public class PianoLayout extends Canvas implements KeyListener {
 
    public static JButton createWhiteKey(int i) {
       Icon whiteKeyIcon = new ImageIcon("WhiteKey.png");
-      JButton whiteKey = new JButton(whiteKeyIcon);
+      JButton whiteKey = new JButton(whiteKeyboard[i], whiteKeyIcon);
+      whiteKey.setVerticalTextPosition(SwingConstants.CENTER);
+      whiteKey.setHorizontalTextPosition(SwingConstants.CENTER);
       whiteKey.setBorder(new LineBorder(Color.BLACK));
       whiteKey.setLocation(90 + i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
@@ -155,9 +159,9 @@ public class PianoLayout extends Canvas implements KeyListener {
       return whiteKey;
    }
 
-   public static JButton createBlackKey(int i) {
+   public static JButton createBlackKey(int i, int j) {
       Icon blackKeyIcon = new ImageIcon("BlackKey.png");
-      JButton blackKey = new JButton(blackKeyIcon);
+      JButton blackKey = new JButton(blackKeyboard[j], blackKeyIcon);
       blackKey.setBorder(new LineBorder(Color.BLACK));
    
       blackKey.setLocation(90 + SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
