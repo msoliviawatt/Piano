@@ -8,7 +8,9 @@ public class PianoLayout extends Canvas implements KeyListener {
 
    static Key[] keys;
    static HashMap<Integer, String> keyFile = null;
-   Icon background = new ImageIcon("wood.jpeg");
+   ImageIcon background = new ImageIcon("wood.jpeg");
+   Image scaledImage = background.getImage().getScaledInstance(1300, 500,Image.SCALE_DEFAULT);
+   ImageIcon scaledBackground = new ImageIcon(scaledImage);
    final static int SCREEN_WIDTH = 1300;
    final static int SCREEN_HEIGHT = 500;
    static JFrame frame = null;
@@ -18,7 +20,7 @@ public class PianoLayout extends Canvas implements KeyListener {
    public PianoLayout() {
       frame = new JFrame("Piano");
       JLabel contentPane = new JLabel();
-      contentPane.setIcon(background);
+      contentPane.setIcon(scaledBackground);
       contentPane.setLayout(new BorderLayout());
       frame.setContentPane(contentPane);
    
