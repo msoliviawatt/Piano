@@ -17,6 +17,7 @@ public class Key extends Audio {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 playKey();
                 System.out.println(keyName);
+                PianoLayout.frame.requestFocusInWindow();
             }
         });
     }
