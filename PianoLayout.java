@@ -30,6 +30,7 @@ public class PianoLayout extends Canvas implements KeyListener {
       frame.requestFocusInWindow();
    }
       
+
    public void keyPressed(KeyEvent e) {
       int key = e.getKeyCode();
       System.out.println(key);
@@ -45,6 +46,7 @@ public class PianoLayout extends Canvas implements KeyListener {
    public void keyTyped(KeyEvent e) {
    }
    
+ 
    public static JLayeredPane initComponents() {
       JLayeredPane layer = new JLayeredPane();
       layer.setSize(1120, 1150);
