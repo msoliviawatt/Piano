@@ -2,18 +2,24 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.Timer;
 import java.util.HashMap;
    
 public class PianoLayout extends Canvas implements KeyListener {
 
    static Key[] keys;
    static HashMap<Integer, String> keyFile = null;
-
+   Icon background = new ImageIcon("wood.jpeg");
    final static int SCREEN_WIDTH = 1300;
    final static int SCREEN_HEIGHT = 500;
    static JFrame frame = null;
    public PianoLayout() {
       frame = new JFrame("Piano");
+      JLabel contentPane = new JLabel();
+      contentPane.setIcon(background);
+      contentPane.setLayout(new BorderLayout());
+      frame.setContentPane(contentPane);
+   
       frame.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
       frame.getContentPane().setBackground(Color.GRAY);
       frame.add(initComponents());
@@ -24,6 +30,9 @@ public class PianoLayout extends Canvas implements KeyListener {
             public void windowClosing(WindowEvent e) {System.exit(0);} 
          });
       frame.setLocationRelativeTo(null);
+            
+      //requestFocus();
+      //setFocusable(true);
    
       frame.addKeyListener(this);
    
@@ -35,8 +44,11 @@ public class PianoLayout extends Canvas implements KeyListener {
       int key = e.getKeyCode();
       System.out.println(key);
       String fileName = keyFile.get(key);
-      if(fileName != null){
+      if(fileName != null && key != 9)
          Audio.playSound("AudioFiles/" + fileName);
+      if(key == 9){
+         System.out.println("hi");
+         frame.requestFocusInWindow();
       }
    }
 
@@ -80,20 +92,20 @@ public class PianoLayout extends Canvas implements KeyListener {
       }
      
      // Initiate Key-Filename mapping
-      keyFile = new HashMap<Integer, String>();
-      keyFile.put(KeyEvent.VK_1, "C3.mp3");
-      keyFile.put(KeyEvent.VK_2, "C#3.mp3");
-      keyFile.put(KeyEvent.VK_3, "D3.mp3");
-      keyFile.put(KeyEvent.VK_4, "D#3.mp3");
-      keyFile.put(KeyEvent.VK_5, "E3.mp3");
-      keyFile.put(KeyEvent.VK_6, "F3.mp3");
-      keyFile.put(KeyEvent.VK_7, "F#3.mp3");
-      keyFile.put(KeyEvent.VK_8, "G3.mp3");
-      keyFile.put(KeyEvent.VK_9, "G#3.mp3");
-      keyFile.put(KeyEvent.VK_0, "A3.mp3");
-      keyFile.put(KeyEvent.VK_MINUS, "A#3.mp3");
-      keyFile.put(KeyEvent.VK_EQUALS, "B3.mp3");
-      keyFile.put(KeyEvent.VK_TAB, "C4.mp3");
+      keyFile = new HashMap();
+      keyFile.put(KeyEvent.VK_BACK_QUOTE, "C3.mp3");
+      keyFile.put(KeyEvent.VK_1, "C#3.mp3");
+      keyFile.put(KeyEvent.VK_2, "D3.mp3");
+      keyFile.put(KeyEvent.VK_3, "D#3.mp3");
+      keyFile.put(KeyEvent.VK_4, "E3.mp3");
+      keyFile.put(KeyEvent.VK_5, "F3.mp3");
+      keyFile.put(KeyEvent.VK_6, "F#3.mp3");
+      keyFile.put(KeyEvent.VK_7, "G3.mp3");
+      keyFile.put(KeyEvent.VK_8, "G#3.mp3");
+      keyFile.put(KeyEvent.VK_9, "A3.mp3");
+      keyFile.put(KeyEvent.VK_0, "A#3.mp3");
+      keyFile.put(KeyEvent.VK_MINUS, "B3.mp3");
+      keyFile.put(KeyEvent.VK_EQUALS, "C4.mp3");
       keyFile.put(KeyEvent.VK_Q, "C#4.mp3");
       keyFile.put(KeyEvent.VK_W, "D4.mp3");
       keyFile.put(KeyEvent.VK_E, "D#4.mp3");
@@ -107,7 +119,7 @@ public class PianoLayout extends Canvas implements KeyListener {
       keyFile.put(KeyEvent.VK_OPEN_BRACKET, "B4.mp3");
       keyFile.put(KeyEvent.VK_CLOSE_BRACKET, "C5.mp3");
       keyFile.put(KeyEvent.VK_BACK_SLASH, "C#5.mp3");
-      keyFile.put(KeyEvent.VK_CAPS_LOCK, "D3.mp3");
+      keyFile.put(KeyEvent.VK_CAPS_LOCK, "D5.mp3");
       keyFile.put(KeyEvent.VK_A, "D#5.mp3");
       keyFile.put(KeyEvent.VK_S, "E5.mp3");
       keyFile.put(KeyEvent.VK_D, "F5.mp3");
@@ -147,6 +159,8 @@ public class PianoLayout extends Canvas implements KeyListener {
    public static JButton createBlackKey(int i) {
       Icon blackKeyIcon = new ImageIcon("BlackKey.png");
       JButton blackKey = new JButton(blackKeyIcon);
+      blackKey.setBorder(new LineBorder(Color.BLACK));
+   
       blackKey.setLocation(90 + SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
    
@@ -163,6 +177,7 @@ public class PianoLayout extends Canvas implements KeyListener {
       return keyName + octave;
    }
   
+
    public static void main(String[] args) {
       new PianoLayout();
    }
