@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.Timer;
 import java.util.HashMap;
    
 public class PianoLayout extends Canvas implements KeyListener {
@@ -26,21 +25,18 @@ public class PianoLayout extends Canvas implements KeyListener {
          });
       frame.setLocationRelativeTo(null);
    
-      //requestFocus();
-      //setFocusable(true);
-   
       frame.addKeyListener(this);
    
       frame.requestFocusInWindow();
    }
       
-
    public void keyPressed(KeyEvent e) {
       int key = e.getKeyCode();
       System.out.println(key);
       String fileName = keyFile.get(key);
-      if(fileName != null)
+      if(fileName != null){
          Audio.playSound("AudioFiles/" + fileName);
+      }
    }
 
    public void keyReleased(KeyEvent e) {
@@ -49,7 +45,6 @@ public class PianoLayout extends Canvas implements KeyListener {
    public void keyTyped(KeyEvent e) {
    }
    
- 
    public static JLayeredPane initComponents() {
       JLayeredPane layer = new JLayeredPane();
       layer.setSize(1120, 1150);
@@ -83,7 +78,7 @@ public class PianoLayout extends Canvas implements KeyListener {
       }
      
      // Initiate Key-Filename mapping
-      keyFile = new HashMap();
+      keyFile = new HashMap<Integer, String>();
       keyFile.put(KeyEvent.VK_1, "C3.mp3");
       keyFile.put(KeyEvent.VK_2, "C#3.mp3");
       keyFile.put(KeyEvent.VK_3, "D3.mp3");
@@ -166,7 +161,6 @@ public class PianoLayout extends Canvas implements KeyListener {
       return keyName + octave;
    }
   
-
    public static void main(String[] args) {
       new PianoLayout();
    }
