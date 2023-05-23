@@ -11,6 +11,25 @@ public class PianoLayout implements KeyListener {
    ImageIcon background = new ImageIcon("wood.jpeg");
    Image scaledImage = background.getImage().getScaledInstance(1300, 500,Image.SCALE_DEFAULT);
    ImageIcon scaledBackground = new ImageIcon(scaledImage);
+
+   //black key image management
+   static ImageIcon blackKeyImage = new ImageIcon("BlackKey.png");
+   static Image tempBK = blackKeyImage.getImage().getScaledInstance(30, 90,Image.SCALE_DEFAULT);
+   static ImageIcon scaledBlackKey = new ImageIcon(tempBK);
+
+   static ImageIcon blackKeyDown = new ImageIcon("BlackKeyDown.png");
+   static Image tempBKD = blackKeyDown.getImage().getScaledInstance(30, 90,Image.SCALE_DEFAULT);
+   static ImageIcon scaledBlackKeyDown = new ImageIcon(tempBKD);
+
+   //white key image management
+   static ImageIcon whiteKeyImage = new ImageIcon("WhiteKey.png");
+   static Image tempWK = whiteKeyImage.getImage().getScaledInstance(40, 150,Image.SCALE_DEFAULT);
+   static ImageIcon scaledWhiteKey = new ImageIcon(tempWK);
+
+   static ImageIcon whiteKeyDown = new ImageIcon("WhiteKeyDown.png");
+   static Image tempWKD = whiteKeyDown.getImage().getScaledInstance(40, 150,Image.SCALE_DEFAULT);
+   static ImageIcon scaledWhiteKeyDown = new ImageIcon(tempWKD);
+
    final static int SCREEN_WIDTH = 1300;
    final static int SCREEN_HEIGHT = 500;
    static JFrame frame = null;
@@ -145,25 +164,19 @@ public class PianoLayout implements KeyListener {
    }
 
    public static JButton createWhiteKey(int i) {
-      Icon whiteKeyIcon = new ImageIcon("WhiteKey.png");
-      JButton whiteKey = new JButton(whiteKeyboard[i], whiteKeyIcon);
+      JButton whiteKey = new JButton(whiteKeyboard[i], scaledWhiteKey);
       whiteKey.setVerticalTextPosition(SwingConstants.CENTER);
       whiteKey.setHorizontalTextPosition(SwingConstants.CENTER);
-      whiteKey.setBorder(new LineBorder(Color.BLACK));
       whiteKey.setLocation(90 + i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
 
       whiteKey.addMouseListener(new MouseAdapter() {
          public void mousePressed(MouseEvent e) {
-             // Change the image of the white key button
-             Icon WhiteKeyDown = new ImageIcon("WhiteKeyDown.png");
-             whiteKey.setIcon(WhiteKeyDown);
+             whiteKey.setIcon(scaledWhiteKeyDown);
          }
  
          public void mouseReleased(MouseEvent e) {
-             // Revert the image of the white key button
-             Icon whiteKeyIcon = new ImageIcon("WhiteKey.png");
-             whiteKey.setIcon(whiteKeyIcon);
+             whiteKey.setIcon(scaledWhiteKey);
          }
      });
  
@@ -172,24 +185,18 @@ public class PianoLayout implements KeyListener {
    }
 
    public static JButton createBlackKey(int i, int j) {
-      Icon blackKeyIcon = new ImageIcon("BlackKey.png");
-      JButton blackKey = new JButton(blackKeyboard[j], blackKeyIcon);
-      blackKey.setBorder(new LineBorder(Color.BLACK));
+      JButton blackKey = new JButton(blackKeyboard[j], scaledBlackKey);
    
       blackKey.setLocation(90 + SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
 
       blackKey.addMouseListener(new MouseAdapter() {
          public void mousePressed(MouseEvent e) {
-             // Change the image of the black key button
-             Icon BlackKeyDown = new ImageIcon("BlackKeyDown.png");
-             blackKey.setIcon(BlackKeyDown);
+             blackKey.setIcon(scaledBlackKeyDown);
          }
  
          public void mouseReleased(MouseEvent e) {
-             // Revert the image of the black key button
-             Icon blackKeyIcon = new ImageIcon("BlackKey.png");
-             blackKey.setIcon(blackKeyIcon);
+             blackKey.setIcon(scaledBlackKey);
          }
      });
    
