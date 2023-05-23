@@ -1,4 +1,6 @@
 import java.io.File;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Key extends Audio {
@@ -6,6 +8,7 @@ public class Key extends Audio {
     private String keyName;
     private File audioFile;
     private JButton keyButton;
+    private boolean keyPressed;
 
 
     public Key(String s, JButton b) {
@@ -18,6 +21,14 @@ public class Key extends Audio {
                 playKey();
                 System.out.println(keyName);
                 PianoLayout.frame.requestFocusInWindow();
+            }
+
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                setKeyPressed(true);
+            }
+
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                setKeyPressed(false);
             }
         });
     }
@@ -44,6 +55,10 @@ public class Key extends Audio {
 
     public void setButton(JButton b) {
         keyButton = b;
+    }
+
+    public void setKeyPressed(boolean pressed) {
+        keyPressed = pressed;
     }
 
     public static Key[] keys = new Key[totalKeys];

@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
    
-public class PianoLayout extends Canvas implements KeyListener {
+public class PianoLayout implements KeyListener {
 
    static Key[] keys;
    static HashMap<Integer, String> keyFile = null;
@@ -152,6 +152,21 @@ public class PianoLayout extends Canvas implements KeyListener {
       whiteKey.setBorder(new LineBorder(Color.BLACK));
       whiteKey.setLocation(90 + i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
+
+      whiteKey.addMouseListener(new MouseAdapter() {
+         public void mousePressed(MouseEvent e) {
+             // Change the image of the white key button
+             Icon WhiteKeyDown = new ImageIcon("WhiteKeyDown.png");
+             whiteKey.setIcon(WhiteKeyDown);
+         }
+ 
+         public void mouseReleased(MouseEvent e) {
+             // Revert the image of the white key button
+             Icon whiteKeyIcon = new ImageIcon("WhiteKey.png");
+             whiteKey.setIcon(whiteKeyIcon);
+         }
+     });
+ 
    
       return whiteKey;
    }
@@ -163,9 +178,32 @@ public class PianoLayout extends Canvas implements KeyListener {
    
       blackKey.setLocation(90 + SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
+
+      blackKey.addMouseListener(new MouseAdapter() {
+         public void mousePressed(MouseEvent e) {
+             // Change the image of the black key button
+             Icon BlackKeyDown = new ImageIcon("BlackKeyDown.png");
+             blackKey.setIcon(BlackKeyDown);
+         }
+ 
+         public void mouseReleased(MouseEvent e) {
+             // Revert the image of the black key button
+             Icon blackKeyIcon = new ImageIcon("BlackKey.png");
+             blackKey.setIcon(blackKeyIcon);
+         }
+     });
    
       return blackKey;
    }
+
+   public static Key findKeyByKeyCode(int keyCode) {
+      for (Key key : keys) {
+          if (key.getButton().getMnemonic() == keyCode) {
+              return key;
+          }
+      }
+      return null;
+  }
 
    public static String whiteKeyName(int i, String[] whiteKeyNames, int octave) {
       String keyName = whiteKeyNames[i % 7];
