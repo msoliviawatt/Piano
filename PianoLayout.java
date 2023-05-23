@@ -7,6 +7,8 @@ public class PianoLayout implements KeyListener {
 
    static Key[] keys;
    static HashMap<Integer, String> keyFile = null;
+
+   //background
    ImageIcon background = new ImageIcon("wood.jpeg");
    Image scaledImage = background.getImage().getScaledInstance(1300, 500,Image.SCALE_DEFAULT);
    ImageIcon scaledBackground = new ImageIcon(scaledImage);
@@ -29,9 +31,12 @@ public class PianoLayout implements KeyListener {
    static Image tempWKD = whiteKeyDown.getImage().getScaledInstance(40, 150,Image.SCALE_DEFAULT);
    static ImageIcon scaledWhiteKeyDown = new ImageIcon(tempWKD);
 
+   //screen
    final static int SCREEN_WIDTH = 1300;
    final static int SCREEN_HEIGHT = 500;
    static JFrame frame = null;
+
+   //keyboard
    static String[] whiteKeyboard = {"`", "2", "4", "5", "7", "9", "-", "=", "W", "R", "T", "U", "O", "[", "]", "CAPS LOCK", "S", "D", "G", "J", "L", ";", "Z", "C", "V", "N", ",", "/"};
    static String[] blackKeyboard = {"1", "3", "6", "8", "0", "Q", "E", "Y", "I", "P", "\\", "A", "F", "H", "K", "SHIFT", "X", "B", "M", "."};
 
