@@ -173,48 +173,55 @@ public class PianoLayout implements KeyListener {
       whiteKey.setHorizontalTextPosition(SwingConstants.CENTER);
       whiteKey.setLocation(90 + i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
-
-      whiteKey.addMouseListener(new MouseAdapter() {
-         public void mousePressed(MouseEvent e) {
-             whiteKey.setIcon(scaledWhiteKeyDown);
-         }
- 
-         public void mouseReleased(MouseEvent e) {
-             whiteKey.setIcon(scaledWhiteKey);
-         }
-     });
- 
+      whiteKey.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+      whiteKey.addMouseListener(
+         new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+               whiteKey.setIcon(scaledWhiteKeyDown);
+            }
+         
+            public void mouseReleased(MouseEvent e) {
+               whiteKey.setIcon(scaledWhiteKey);
+            }
+         });
+   
    
       return whiteKey;
    }
 
    public static JButton createBlackKey(int i, int j) {
       JButton blackKey = new JButton(blackKeyboard[j], scaledBlackKey);
+      blackKey.setContentAreaFilled(false);
+      blackKey.setBorder(null);
+      blackKey.setHorizontalTextPosition(JButton.CENTER);
+      blackKey.setVerticalTextPosition(JButton.CENTER);
+      blackKey.setMargin(new Insets(0, 0, 0, 0));
    
       blackKey.setLocation(90 + SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
-
-      blackKey.addMouseListener(new MouseAdapter() {
-         public void mousePressed(MouseEvent e) {
-             blackKey.setIcon(scaledBlackKeyDown);
-         }
- 
-         public void mouseReleased(MouseEvent e) {
-             blackKey.setIcon(scaledBlackKey);
-         }
-     });
+   
+      blackKey.addMouseListener(
+         new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+               blackKey.setIcon(scaledBlackKeyDown);
+            }
+         
+            public void mouseReleased(MouseEvent e) {
+               blackKey.setIcon(scaledBlackKey);
+            }
+         });
    
       return blackKey;
    }
 
    public static Key findKeyByKeyCode(int keyCode) {
       for (Key key : keys) {
-          if (key.getButton().getMnemonic() == keyCode) {
-              return key;
-          }
+         if (key.getButton().getMnemonic() == keyCode) {
+            return key;
+         }
       }
       return null;
-  }
+   }
 
    public static String whiteKeyName(int i, String[] whiteKeyNames, int octave) {
       String keyName = whiteKeyNames[i % 7];
