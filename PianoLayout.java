@@ -169,11 +169,13 @@ public class PianoLayout implements KeyListener {
 
    public static JButton createWhiteKey(int i) {
       JButton whiteKey = new JButton(whiteKeyboard[i], scaledWhiteKey);
-      whiteKey.setVerticalTextPosition(SwingConstants.CENTER);
-      whiteKey.setHorizontalTextPosition(SwingConstants.CENTER);
       whiteKey.setLocation(90 + i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
       whiteKey.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+
+      whiteKey.setHorizontalTextPosition(SwingConstants.CENTER);
+      whiteKey.setVerticalTextPosition(SwingConstants.CENTER);
+
       whiteKey.addMouseListener(
          new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -196,6 +198,7 @@ public class PianoLayout implements KeyListener {
       blackKey.setHorizontalTextPosition(JButton.CENTER);
       blackKey.setVerticalTextPosition(JButton.CENTER);
       blackKey.setMargin(new Insets(0, 0, 0, 0));
+      blackKey.setForeground(Color.WHITE);
    
       blackKey.setLocation(90 + SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
