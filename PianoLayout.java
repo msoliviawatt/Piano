@@ -8,7 +8,7 @@ public class PianoLayout implements KeyListener {
    static Key[] keys;
    static HashMap<Integer, String> keyFile = null;
 
-   //background
+   //background images
    ImageIcon background = new ImageIcon("wood.jpeg");
    Image scaledImage = background.getImage().getScaledInstance(1300, 500,Image.SCALE_DEFAULT);
    ImageIcon scaledBackground = new ImageIcon(scaledImage);
@@ -40,6 +40,7 @@ public class PianoLayout implements KeyListener {
    static String[] whiteKeyboard = {"`", "2", "4", "5", "7", "9", "-", "=", "W", "R", "T", "U", "O", "[", "]", "CAPS LOCK", "S", "D", "G", "J", "L", ";", "Z", "C", "V", "N", ",", "/"};
    static String[] blackKeyboard = {"1", "3", "6", "8", "0", "Q", "E", "Y", "I", "P", "\\", "A", "F", "H", "K", "SHIFT", "X", "B", "M", "."};
 
+   //sets up JFrame format
    public PianoLayout() {
       frame = new JFrame("Piano");
       JLabel contentPane = new JLabel();
@@ -62,25 +63,24 @@ public class PianoLayout implements KeyListener {
       frame.requestFocusInWindow();
    }
       
-
    public void keyPressed(KeyEvent e) {
       int key = e.getKeyCode();
+      // Play audio and print out name of the note played
       String fileName = keyFile.get(key);
-      if(fileName != null && key != 9)
+      if (fileName != null && key != KeyEvent.VK_TAB) {
          Audio.playSound("AudioFiles/" + fileName);
-      if(key == 9){
-         System.out.println("hi");
-         frame.requestFocusInWindow();
+         System.out.println(fileName.substring(0, fileName.length()-4));//removes ".mp3" so it just shows the note name
       }
    }
 
    public void keyReleased(KeyEvent e) {
    }
 
+
    public void keyTyped(KeyEvent e) {
    }
    
- 
+ //create piano
    public static JLayeredPane initComponents() {
       JLayeredPane layer = new JLayeredPane();
       layer.setSize(1120, 1150);
@@ -90,14 +90,16 @@ public class PianoLayout implements KeyListener {
       String[] whiteKeyNames = {"C", "D", "E", "F", "G", "A", "B"};
       String[] blackKeyNames = {"C#", "D#", "F#", "G#", "A#"};
       int octave = 3; // starting octave number
-      int blackKeyIndex = 0;
+      int blackKeyIndex = 0; //keep track of the black keys
+      
+      //create 28 white keys
       for (i = 0; i < 28; i++) {
          JButton whiteKey = createWhiteKey(i);
          String whi = whiteKeyName(i, whiteKeyNames, octave);
          keys[keyIndex] = new Key(whi, whiteKey);
          layer.add(keys[keyIndex].getButton(), 0, -1);
          keyIndex += 1;
-         if (i % 7 != 2 && i % 7 != 6) {
+         if (i % 7 != 2 && i % 7 != 6) {//checks if there should be a black key
             JButton blackKey = createBlackKey(i, blackKeyIndex);
             String bhi = blackKeyName(blackKeyIndex, blackKeyNames, octave);
             keys[keyIndex] = new Key(bhi, blackKey);
@@ -168,15 +170,13 @@ public class PianoLayout implements KeyListener {
    }
 
    public static JButton createWhiteKey(int i) {
+      //creates a jbutton for each white key with an image and and a string(which key to press to play the note)
       JButton whiteKey = new JButton(whiteKeyboard[i], scaledWhiteKey);
       whiteKey.setLocation(90 + i*40, SCREEN_HEIGHT/4);
       whiteKey.setSize(40, 150);
       whiteKey.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-
-      whiteKey.setHorizontalTextPosition(SwingConstants.CENTER);
-      whiteKey.setVerticalTextPosition(SwingConstants.CENTER);
-
-      whiteKey.addMouseListener(
+      whiteKey.setHorizontalTextPosition(SwingConstants.CENTER);               
+      whiteKey.addMouseListener( //change the image when white key is clicked
          new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                whiteKey.setIcon(scaledWhiteKeyDown);
@@ -186,12 +186,11 @@ public class PianoLayout implements KeyListener {
                whiteKey.setIcon(scaledWhiteKey);
             }
          });
-   
-   
       return whiteKey;
    }
 
    public static JButton createBlackKey(int i, int j) {
+      //creates a jbutton for each black key with an image and and a string(which key to press to play the note)
       JButton blackKey = new JButton(blackKeyboard[j], scaledBlackKey);
       blackKey.setContentAreaFilled(false);
       blackKey.setBorder(null);
@@ -199,11 +198,15 @@ public class PianoLayout implements KeyListener {
       blackKey.setVerticalTextPosition(JButton.CENTER);
       blackKey.setMargin(new Insets(0, 0, 0, 0));
       blackKey.setForeground(Color.WHITE);
+      if (blackKeyboard[j].equals("SHIFT")) {
+         Font shiftFont = new Font("Arial", Font.PLAIN, 10); // Set a smaller font size for "Shift" because it doesn't fit
+         blackKey.setFont(shiftFont);
+      }
    
       blackKey.setLocation(90 + SCREEN_WIDTH/52 + i * 40, SCREEN_HEIGHT/4);
       blackKey.setSize(30, 90);
    
-      blackKey.addMouseListener(
+      blackKey.addMouseListener(//change the image when black key is clicked
          new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                blackKey.setIcon(scaledBlackKeyDown);
@@ -217,11 +220,13 @@ public class PianoLayout implements KeyListener {
       return blackKey;
    }
 
+     //get the white key name for the audio file
    public static String whiteKeyName(int i, String[] whiteKeyNames, int octave) {
       String keyName = whiteKeyNames[i % 7];
       return keyName + octave;
    }
-  
+   
+    //get the black key name for the audio file
    public static String blackKeyName(int i, String[] blackKeyNames, int octave) {
       String keyName = blackKeyNames[i % 5];
       return keyName + octave;
