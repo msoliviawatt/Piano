@@ -69,7 +69,7 @@ public class PianoLayout implements KeyListener {
       if(fileName != null && key != 9)
          Audio.playSound("AudioFiles/" + fileName);
       if(key == 9){
-         System.out.println("hi"); //what is this @aakash
+         System.out.println("hi");
          frame.requestFocusInWindow();
       }
    }
@@ -215,15 +215,6 @@ public class PianoLayout implements KeyListener {
          });
    
       return blackKey;
-   }
-
-   public static Key findKeyByKeyCode(int keyCode) {
-      for (Key key : keys) {
-         if (key.getButton().getMnemonic() == keyCode) {
-            return key;
-         }
-      }
-      return null;
    }
 
    public static String whiteKeyName(int i, String[] whiteKeyNames, int octave) {
