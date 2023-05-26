@@ -1,3 +1,13 @@
+/*Full project description: This is a piano with 28 white keys and 20 black keys, meaning it spans 4 octaves. 
+The background is a dark piece of wood, and the keys are either white or black. Each key is labeled with a letter that corresponds
+to its key on your mechanical keyboard that you can press to play the note. 
+The piano can be played by clicking with the mouse or by pressing the corresponding keys on the keyboard. 
+When you click the keys with your mouse, the key's button will change image to indicate that it is being pressed down, and the corresponding
+mp3 file will be played. You can use this piano to practice when not at home or just to have fun. The added benefit of using this is that
+you can connect headphones to your computer and play the piano without disturbing anyone around you. You could also connect your computer
+to a speaker and play the piano for a larger audience. 
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
